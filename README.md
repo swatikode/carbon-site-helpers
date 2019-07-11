@@ -29,7 +29,7 @@ Repository containing helpers for Carbon Graphs Site. Uses Material UI and React
 ## Usage
 
 ```javascript
-import renderSiteApp from "carbon-site-helpers";
+import renderSiteApp from "@cerner/carbon-site-helpers";
 
 renderSiteApp(
     [
