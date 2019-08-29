@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import marked from "marked";
-import { MuiThemeProvider } from "@material-ui/core/styles/index";
+import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
 import DOMPurify from "dompurify";
+import classNames from "classnames";
 
 import Paper from "@material-ui/core/Paper";
 import Table from "@material-ui/core/Table";
@@ -18,26 +19,27 @@ import useReleases from "../../hooks/useReleases";
 import Header from "../../components/Header/Header";
 import CONSTANTS from "../../helpers/constants";
 
+const styles = () => ({
+    container: {
+        padding: "6rem"
+    },
+    cardHolder: {
+        border: "none",
+        paddingBottom: "1rem"
+    },
+    isFirstCard: {
+        borderWidth: "2px",
+        borderStyle: "solid",
+        borderColor: "#9ccc65",
+        backgroundColor: "#f1f8e9"
+    }
+});
+
 const ReleasesPage = (props) => {
-    const { gitHubURL } = props;
+    const { classes, gitHubURL } = props;
     const versions = useReleases(gitHubURL);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
-    const styles = {
-        container: {
-            padding:"6rem"
-        },
-        cardHolder: {
-            border: "none",
-            paddingBottom: "1rem"
-        },
-        getCardBackground: (index) => {
-            if(index === 0) {
-                return "linear-gradient(to bottom, #FFFFFF, #aed581)"
-            }
-            return ""
-        }
-    };
 
     function getMarkdownText(body) {
         const rawMarkup = marked(DOMPurify.sanitize(body), { sanitize: true });
@@ -56,17 +58,21 @@ const ReleasesPage = (props) => {
         setPage(0);
     };
 
+    if (!versions.length) {
+        return "";
+    }
+
     return (
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
             <Paper>
                 <Header withNav={false}/>
-                <div style={styles.container}>
+                <div className={classes.container}>
                     <Table>
                         <TableBody>
                             {versions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((v, index) => (
                                 <TableRow key={v.id}>
-                                    <TableCell style={styles.cardHolder}>
-                                        <Card style={{background: styles.getCardBackground(index)}}>
+                                    <TableCell className={classes.cardHolder}>
+                                        <Card raised={index === 0} className={classNames({ [classes.isFirstCard]: index === 0 })}>
                                             <CardContent>
                                                 {getReleaseDetails(v)}
                                             </CardContent>
@@ -95,7 +101,8 @@ const ReleasesPage = (props) => {
 };
 
 ReleasesPage.propTypes = {
-    gitHubURL: PropTypes.string.isRequired
+    gitHubURL: PropTypes.string.isRequired,
+    classes: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
-export default ReleasesPage;
+export default withStyles(styles, { withTheme: true })(ReleasesPage);

@@ -4,8 +4,7 @@ import { createMuiTheme } from "@material-ui/core";
  * @enum {object}
  */
 export default {
-    GITHUB_API_REPO_URL: "https://api.github.com/repos{repo_name}",
-    GITHUB_API_RELEASE_URL: "https://api.github.com/repos{repositoryName}/releases?id={repositoryID}",
+    GITHUB_API_RELEASE_URL: "https://api.github.com/repos{repo_name}/releases",
     GITHUB_REPO_TOOLTIP: "GitHub Repository",
     GITHUB_SITE: "github.com",
     HEADER_MAIN_TITLE: "Carbon",

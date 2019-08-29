@@ -12,7 +12,7 @@ const styles = {
 
 const getLatestRelease = (releases) => releases[0].tag_name;
 
-const LatestRelease = (props) => {
+const LatestReleasePage = (props) => {
     const { gitHubURL } = props;
     const { isHome } = props;
 
@@ -32,14 +32,14 @@ const LatestRelease = (props) => {
     ) : "";
 };
 
-LatestRelease.propTypes = {
+LatestReleasePage.propTypes = {
     isHome: PropTypes.bool,
     gitHubURL: PropTypes.string
 };
 
-LatestRelease.defaultProps = {
+LatestReleasePage.defaultProps = {
     isHome: false,
     gitHubURL: ""
 };
 
-export default LatestRelease;
+export default LatestReleasePage;

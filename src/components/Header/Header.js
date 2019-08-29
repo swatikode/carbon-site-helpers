@@ -11,7 +11,7 @@ import React from "react";
 import CONSTANTS from "../../helpers/constants";
 import SearchBar from "../Search/SearchBar";
 import GithubIcon from "../SvgIcons/GitHubIcon";
-import LatestRelease from "../../pages/Releases/LatestRelease";
+import LatestReleasePage from "../../pages/Releases/LatestReleasePage";
 
 const styles = theme => ({
     appBarHome: {
@@ -69,7 +69,7 @@ function Header(props) {
                             {title}
                         </Typography>
                         <SearchBar pages={pages} isHome={isHome} withNav={withNav}/>
-                        <LatestRelease isHome={isHome} gitHubURL={gitHubURL}/>
+                        <LatestReleasePage isHome={isHome} gitHubURL={gitHubURL}/>
                         <Tooltip
                             title={CONSTANTS.GITHUB_REPO_TOOLTIP}
                             enterDelay={300}
