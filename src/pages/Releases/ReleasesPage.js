@@ -23,6 +23,22 @@ const ReleasesPage = (props) => {
     const versions = useReleases(gitHubURL);
     const [page, setPage] = useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(4);
+    const styles = {
+        container: {
+            padding:"6rem"
+        },
+        cardHolder: {
+            border: "none",
+            paddingBottom: "1rem"
+        },
+        getCardBackground: (index) => {
+            if(index === 0) {
+                return {
+                    background: "linear-gradient(to bottom, #FFFFFF, #aed581)"
+                }
+            }
+        }
+    };
 
     function getMarkdownText(body) {
         const rawMarkup = marked(DOMPurify.sanitize(body), { sanitize: true });
@@ -45,13 +61,13 @@ const ReleasesPage = (props) => {
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
             <Paper>
                 <Header withNav={false}/>
-                <div style={{ padding: "80px" }}>
+                <div style={styles.container}>
                     <Table>
                         <TableBody>
-                            {versions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(v => (
+                            {versions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((v, index) => (
                                 <TableRow key={v.id}>
-                                    <TableCell style={{ border: "none", paddingBottom: "1rem" }}>
-                                        <Card>
+                                    <TableCell style={styles.cardHolder}>
+                                        <Card style={styles.getCardBackground(index)}>
                                             <CardContent>
                                                 {getReleaseDetails(v)}
                                             </CardContent>
