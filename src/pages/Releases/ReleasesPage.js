@@ -18,6 +18,7 @@ import CardContent from "@material-ui/core/CardContent";
 import useReleases from "../../hooks/useReleases";
 import Header from "../../components/Header/Header";
 import CONSTANTS from "../../helpers/constants";
+import {getLatestRelease} from "../../helpers/releasesInfo";
 
 const styles = () => ({
     container: {
@@ -27,7 +28,7 @@ const styles = () => ({
         border: "none",
         paddingBottom: "1rem"
     },
-    isFirstCard: {
+    latestRelease: {
         borderWidth: "2px",
         borderStyle: "solid",
         borderColor: "#9ccc65",
@@ -39,7 +40,7 @@ const ReleasesPage = (props) => {
     const { classes, gitHubURL } = props;
     const versions = useReleases(gitHubURL);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(4);
+    const [rowsPerPage, setRowsPerPage] = useState(4);
 
     function getMarkdownText(body) {
         const rawMarkup = marked(DOMPurify.sanitize(body), { sanitize: true });
@@ -65,14 +66,14 @@ const ReleasesPage = (props) => {
     return (
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
             <Paper>
-                <Header withNav={false}/>
+                <Header withNav={false} gitHubURL={gitHubURL}/>
                 <div className={classes.container}>
                     <Table>
                         <TableBody>
                             {versions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((v, index) => (
                                 <TableRow key={v.id}>
                                     <TableCell className={classes.cardHolder}>
-                                        <Card raised={index === 0} className={classNames({ [classes.isFirstCard]: index === 0 })}>
+                                        <Card raised={index === 0} className={classNames({ [classes.latestRelease]: getLatestRelease(versions) === v.tag_name })}>
                                             <CardContent>
                                                 {getReleaseDetails(v)}
                                             </CardContent>

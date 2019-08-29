@@ -3,14 +3,13 @@ import PropTypes from "prop-types";
 import Chip from "@material-ui/core/Chip";
 import useReleases from "../../hooks/useReleases";
 import CONSTANTS from "../../helpers/constants";
+import { getLatestRelease } from "../../helpers/releasesInfo";
 
 const styles = {
     marginLeft: "10px",
     backgroundColor: "#fff",
     color: "#0074b8"
 };
-
-const getLatestRelease = (releases) => releases[0].tag_name;
 
 const LatestReleasePage = (props) => {
     const { gitHubURL } = props;

@@ -58,16 +58,17 @@ AppRouter.propTypes = {
 /**
  * Renders the carbon graphs site
  * @param {Array<Object>} pages - Hash Routed pages within the site
- * @param {string} startLink - href link to be routed when clicked on "Getting Started" link.
+ * @param {object} siteOptions Site configuration details
+ * @param {string} siteOptions.gettingStartedLink - href link to be routed when clicked on "Getting Started" link.
  * Needs to be a `pathname` within `pages`, appended with `#`
- * @param {string} gitHubURL - A github repo releases URL. For e.g. https://api.github.com/repos/cerner/carbon-graphs/releases
+ * @param {string} siteOptions.gitHubRepo - A github repo releases URL. For e.g. https://api.github.com/repos/cerner/carbon-graphs/releases
  * @returns {undefined} returns nothing
  */
-const renderSiteApp = (pages, startLink, gitHubURL) => {
+const renderSiteApp = (pages, siteOptions) => {
     validatePageObject(pages);
-    validateStartLink(startLink);
+    validateStartLink(siteOptions.gettingStartedLink);
     ReactDOM.render(
-        <AppRouter pages={pages} startLink={startLink} gitHubURL={gitHubURL}/>,
+        <AppRouter pages={pages} startLink={siteOptions.gettingStartedLink} gitHubURL={siteOptions.gitHubRepo}/>,
         document.getElementById("root")
     );
 };
