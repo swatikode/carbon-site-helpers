@@ -33,10 +33,9 @@ const ReleasesPage = (props) => {
         },
         getCardBackground: (index) => {
             if(index === 0) {
-                return {
-                    background: "linear-gradient(to bottom, #FFFFFF, #aed581)"
-                }
+                return "linear-gradient(to bottom, #FFFFFF, #aed581)"
             }
+            return ""
         }
     };
 
@@ -47,7 +46,7 @@ const ReleasesPage = (props) => {
 
     const getReleaseDetails = version => {
         return (
-            <div key={version.id} dangerouslySetInnerHTML={getMarkdownText(version.body)}/>
+            <div key={version.id} dangerouslySetInnerHTML={getMarkdownText(version.body)}/> //  eslint-disable-line react/no-danger
         );
     };
 
@@ -67,7 +66,7 @@ const ReleasesPage = (props) => {
                             {versions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((v, index) => (
                                 <TableRow key={v.id}>
                                     <TableCell style={styles.cardHolder}>
-                                        <Card style={styles.getCardBackground(index)}>
+                                        <Card style={{background: styles.getCardBackground(index)}}>
                                             <CardContent>
                                                 {getReleaseDetails(v)}
                                             </CardContent>
