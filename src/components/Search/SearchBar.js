@@ -62,14 +62,14 @@ const styles = theme => ({
 });
 
 function SearchBar(props) {
-    const { classes, pages, isHome } = props;
+    const { classes, pages, isHome, withNav } = props;
     const handleKeyDown = e => {
         e.preventDownshiftDefault =
             e.target.keyCode === 13 || e.key === "Enter";
     };
     return (
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            {!isHome ? (
+            {!isHome && withNav ? (
                 <Downshift id="downshift-popper">
                     {({
                         getInputProps,
@@ -153,12 +153,14 @@ function SearchBar(props) {
 SearchBar.propTypes = {
     classes: PropTypes.objectOf(PropTypes.string).isRequired,
     pages: PropTypes.arrayOf(PropTypes.object),
-    isHome: PropTypes.bool
+    isHome: PropTypes.bool,
+    withNav: PropTypes.bool
 };
 
 SearchBar.defaultProps = {
     pages: [],
-    isHome: false
+    isHome: false,
+    withNav: true
 };
 
 export default withStyles(styles, { withTheme: true })(SearchBar);

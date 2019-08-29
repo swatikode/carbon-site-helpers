@@ -6,17 +6,18 @@ import Header from "../../components/Header/Header";
 import CONSTANTS from "../../helpers/constants";
 
 function HomePage(props) {
-    const { startLink } = props;
+    const { startLink, gitHubURL } = props;
     return (
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            <Header isHome />
-            <HomePageBlurb startLink={startLink} />
+            <Header isHome gitHubURL={gitHubURL}/>
+            <HomePageBlurb startLink={startLink}/>
         </MuiThemeProvider>
     );
 }
 
 HomePage.propTypes = {
-    startLink: PropTypes.string.isRequired
+    startLink: PropTypes.string.isRequired,
+    gitHubURL: PropTypes.string.isRequired
 };
 
 export default HomePage;

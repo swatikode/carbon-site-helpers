@@ -7,11 +7,11 @@ import ResponsiveDrawer from "../../components/Drawer/ResponsiveDrawer";
 import CONSTANTS from "../../helpers/constants";
 
 function GettingStartedPage(props) {
-    const { pages, location } = props;
+    const { pages, location, gitHubURL } = props;
     return (
         <RouterContextProvider value={location}>
             <MuiThemeProvider theme={CONSTANTS.THEME()}>
-                <ResponsiveDrawer pages={pages} currentPage={location} />
+                <ResponsiveDrawer pages={pages} currentPage={location} gitHubURL={gitHubURL}/>
             </MuiThemeProvider>
         </RouterContextProvider>
     );
@@ -19,7 +19,8 @@ function GettingStartedPage(props) {
 
 GettingStartedPage.propTypes = {
     pages: PropTypes.arrayOf(PropTypes.object).isRequired,
-    location: PropTypes.objectOf(PropTypes.string).isRequired
+    location: PropTypes.objectOf(PropTypes.string).isRequired,
+    gitHubURL: PropTypes.string.isRequired
 };
 
 export default withRouter(GettingStartedPage);
