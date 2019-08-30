@@ -8,10 +8,15 @@ import {
     validatePageObject,
     validateStartLink
 } from "./helpers/pageHelpers";
-import { GettingStartedPage, HomePage, NotFoundPage } from "./pages";
+import {
+    GettingStartedPage,
+    HomePage,
+    NotFoundPage,
+    ReleasesPage
+} from "./pages";
 
 function AppRouter(props) {
-    const { pages, startLink } = props;
+    const { pages, startLink, gitHubURL } = props;
     return (
         <HashRouter basename={process.env.PUBLIC_URL}>
             <div>
@@ -21,15 +26,20 @@ function AppRouter(props) {
                             exact
                             key={p}
                             path={p}
-                            render={() => <GettingStartedPage pages={pages} />}
+                            render={() => <GettingStartedPage pages={pages} gitHubURL={gitHubURL}/>}
                         />
                     ))}
                     <Route
                         exact
                         path="/"
-                        render={() => <HomePage startLink={startLink} />}
+                        render={() => <HomePage startLink={startLink} gitHubURL={gitHubURL}/>}
                     />
-                    <Route component={NotFoundPage} />
+                    <Route
+                        exact
+                        path={`/${CONSTANTS.VERSIONS_PATH}`}
+                        render={() => <ReleasesPage gitHubURL={gitHubURL}/>}
+                    />
+                    <Route component={NotFoundPage}/>
                 </Switch>
             </div>
         </HashRouter>
@@ -38,7 +48,8 @@ function AppRouter(props) {
 
 AppRouter.propTypes = {
     pages: PropTypes.arrayOf(PropTypes.object).isRequired,
-    startLink: PropTypes.string.isRequired
+    startLink: PropTypes.string.isRequired,
+    gitHubURL: PropTypes.string.isRequired
 };
 
 /*
@@ -47,15 +58,17 @@ AppRouter.propTypes = {
 /**
  * Renders the carbon graphs site
  * @param {Array<Object>} pages - Hash Routed pages within the site
- * @param {string} startLink - href link to be routed when clicked on "Getting Started" link.
+ * @param {object} siteOptions Site configuration details
+ * @param {string} siteOptions.gettingStartedLink - href link to be routed when clicked on "Getting Started" link.
  * Needs to be a `pathname` within `pages`, appended with `#`
+ * @param {string} siteOptions.gitHubRepo - A github repo releases URL. For e.g. https://api.github.com/repos/cerner/carbon-graphs/releases
  * @returns {undefined} returns nothing
  */
-const renderSiteApp = (pages, startLink) => {
+const renderSiteApp = (pages, siteOptions) => {
     validatePageObject(pages);
-    validateStartLink(startLink);
+    validateStartLink(siteOptions.gettingStartedLink);
     ReactDOM.render(
-        <AppRouter pages={pages} startLink={startLink} />,
+        <AppRouter pages={pages} startLink={siteOptions.gettingStartedLink} gitHubURL={siteOptions.gitHubRepo}/>,
         document.getElementById("root")
     );
 };

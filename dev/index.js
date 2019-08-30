@@ -83,5 +83,8 @@ renderSiteApp(
             }
         }
     ],
-    "#/folder-1/file-1"
+    {
+        gettingStartedLink: "#/folder-1/file-1",
+        gitHubRepo: "https://github.com/cerner/carbon-graphs"
+    }
 );

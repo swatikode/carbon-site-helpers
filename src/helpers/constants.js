@@ -4,8 +4,9 @@ import { createMuiTheme } from "@material-ui/core";
  * @enum {object}
  */
 export default {
-    GITHUB_REPO: "https://github.com/cerner/carbon-graphs",
+    GITHUB_API_RELEASE_URL: "https://api.github.com/repos{repo_name}/releases",
     GITHUB_REPO_TOOLTIP: "GitHub Repository",
+    GITHUB_SITE: "github.com",
     HEADER_MAIN_TITLE: "Carbon",
     HEADER_ROOT_LINK: "#",
     NOTFOUND_PRIMARY_TITLE: "404",
@@ -31,7 +32,8 @@ export default {
             },
             typography: {
                 useNextVariants: true,
-                fontFamily: ["Segoe UI", "sans-serif"]
+                fontFamily: "'Segoe UI', sans-serif"
             }
-        })
+        }),
+    VERSIONS_PATH: "versions"
 };

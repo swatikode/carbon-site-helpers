@@ -11,6 +11,7 @@ import React from "react";
 import CONSTANTS from "../../helpers/constants";
 import SearchBar from "../Search/SearchBar";
 import GithubIcon from "../SvgIcons/GitHubIcon";
+import LatestReleasePage from "../../pages/Releases/LatestReleasePage";
 
 const styles = theme => ({
     appBarHome: {
@@ -39,7 +40,7 @@ const styles = theme => ({
 });
 
 function Header(props) {
-    const { classes, title, onMenuClick, isHome, pages } = props;
+    const { classes, title, onMenuClick, isHome, pages, gitHubURL, withNav } = props;
     return (
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
             <div className={classes.root}>
@@ -47,7 +48,7 @@ function Header(props) {
                     position="fixed"
                     className={classNames({
                         [classes.appBarHome]: true,
-                        [classes.appBarWithNav]: !isHome
+                        [classes.appBarWithNav]: !isHome && withNav
                     })}
                 >
                     <Toolbar>
@@ -58,7 +59,7 @@ function Header(props) {
                             color="inherit"
                             aria-label="Menu"
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
                         <Typography
                             variant="h6"
@@ -67,7 +68,8 @@ function Header(props) {
                         >
                             {title}
                         </Typography>
-                        <SearchBar pages={pages} isHome={isHome} />
+                        <SearchBar pages={pages} isHome={isHome} withNav={withNav}/>
+                        <LatestReleasePage isHome={isHome} gitHubURL={gitHubURL}/>
                         <Tooltip
                             title={CONSTANTS.GITHUB_REPO_TOOLTIP}
                             enterDelay={300}
@@ -75,12 +77,12 @@ function Header(props) {
                             <IconButton
                                 component="a"
                                 color="inherit"
-                                href={CONSTANTS.GITHUB_REPO}
+                                href={gitHubURL}
                                 aria-label={CONSTANTS.GITHUB_REPO_TOOLTIP}
                                 data-ga-event-category="AppBar"
                                 data-ga-event-action="github"
                             >
-                                <GithubIcon />
+                                <GithubIcon/>
                             </IconButton>
                         </Tooltip>
                     </Toolbar>
@@ -95,14 +97,18 @@ Header.propTypes = {
     pages: PropTypes.arrayOf(PropTypes.object),
     onMenuClick: PropTypes.func,
     title: PropTypes.string,
-    isHome: PropTypes.bool
+    isHome: PropTypes.bool,
+    gitHubURL: PropTypes.string,
+    withNav: PropTypes.bool
 };
 
 Header.defaultProps = {
     title: "",
     pages: [],
     onMenuClick: () => {},
-    isHome: false
+    isHome: false,
+    withNav: true,
+    gitHubURL: ""
 };
 
 export default withStyles(styles, { withTheme: true })(Header);
