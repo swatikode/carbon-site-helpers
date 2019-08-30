@@ -25,6 +25,9 @@ Repository containing helpers for Carbon Graphs Site. Uses Material UI and React
 -   react-router-dom
 -   prop-types
 -   classnames
+-   dompurify
+-   axios
+-   marked
 
 ## Usage
 
@@ -54,7 +57,10 @@ renderSiteApp(
             ]
         }
     ],
-    "#/line/simple-line"
+    {
+        gettingStartedLink: "#/line/simple-line",
+        gitHubRepo: "https://github.com/MyRepo"
+    }
 );
 ```
 
