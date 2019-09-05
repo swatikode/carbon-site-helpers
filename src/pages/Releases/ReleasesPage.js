@@ -39,7 +39,7 @@ const ReleasesPage = props => {
     const { classes, gitHubURL } = props;
     const versions = useReleases(gitHubURL);
     const [page, setPage] = useState(0);
-    const [rowsPerPage, setRowsPerPage] = useState(4);
+    const [rowsPerPage, setRowsPerPage] = useState(5);
 
     function getMarkdownText(body) {
         const rawMarkup = marked(DOMPurify.sanitize(body));
@@ -106,7 +106,7 @@ const ReleasesPage = props => {
                         <TableFooter>
                             <TableRow>
                                 <TablePagination
-                                    rowsPerPageOptions={[rowsPerPage, 10, 25]}
+                                    rowsPerPageOptions={[5, 10, 25]}
                                     count={versions.length}
                                     onChangePage={handlePageChange}
                                     onChangeRowsPerPage={
