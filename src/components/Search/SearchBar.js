@@ -58,6 +58,10 @@ const styles = theme => ({
     },
     container: {
         position: "relative"
+    },
+    paperPopper: {
+        marginTop: theme.spacing(2.5),
+        marginLeft: theme.spacing(4)
     }
 });
 
@@ -113,10 +117,9 @@ function SearchBar(props) {
                                         : {})}
                                 >
                                     <Paper
-                                        square
+                                        elevation={2}
+                                        className={classes.paperPopper}
                                         style={{
-                                            marginTop: 15,
-                                            marginLeft: 35,
                                             width: popperNode
                                                 ? popperNode.clientWidth
                                                 : null

@@ -1,22 +1,33 @@
-import { Link } from "@material-ui/core";
-import MenuItem from "@material-ui/core/MenuItem";
-import PropTypes from "prop-types";
 import React from "react";
+import PropTypes from "prop-types";
+import Link from "@material-ui/core/Link";
+import MenuItem from "@material-ui/core/MenuItem";
+import { makeStyles } from "@material-ui/styles";
 import { getHashedHref } from "../../helpers/pageHelpers";
 import { makeSearchTitle } from "../../helpers/searchHelpers";
 
+const useStyles = makeStyles(theme => ({
+    searchItemRoot: {
+        color: theme.palette.primary.dark,
+        flex: 1,
+        flexWrap: "wrap",
+        whiteSpace: "normal",
+        alignItems: "center"
+    }
+}));
+
 function SearchItem({ suggestion, itemProps, index, highlightedIndex }) {
+    const classes = useStyles();
     return (
         <Link underline="none" href={getHashedHref(suggestion.pathname)}>
             <MenuItem
+                className={classes.searchItemRoot}
                 {...itemProps}
                 button
                 divider
                 title={suggestion.pathname}
                 key={suggestion.pathname}
-                component="div"
                 selected={highlightedIndex === index}
-                alignItems="flex-start"
             >
                 {makeSearchTitle(suggestion.pathname)}
             </MenuItem>

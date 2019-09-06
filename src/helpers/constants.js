@@ -1,4 +1,4 @@
-import { createMuiTheme } from "@material-ui/core";
+import { createMuiTheme } from "@material-ui/core/styles";
 
 /**
  * @enum {object}
@@ -21,6 +21,7 @@ export default {
             palette: {
                 primary: {
                     main: "#0074b8",
+                    dark: "#000000",
                     navigationLink: "#000000"
                 },
                 secondary: {
@@ -31,8 +32,18 @@ export default {
                 }
             },
             typography: {
-                useNextVariants: true,
-                fontFamily: "'Segoe UI', sans-serif"
+                fontFamily: [
+                    "-apple-system",
+                    "BlinkMacSystemFont",
+                    '"Segoe UI"',
+                    "Roboto",
+                    '"Helvetica Neue"',
+                    "Arial",
+                    "sans-serif",
+                    '"Apple Color Emoji"',
+                    '"Segoe UI Emoji"',
+                    '"Segoe UI Symbol"'
+                ].join(",")
             }
         }),
     VERSIONS_PATH: "versions"
