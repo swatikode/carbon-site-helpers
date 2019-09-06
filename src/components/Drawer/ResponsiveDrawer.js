@@ -25,7 +25,7 @@ const styles = theme => ({
         display: "flex"
     },
     title: {
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
         display: "flex",
         marginBottom: theme.spacing(0.5),
         "&:hover": {
@@ -63,7 +63,7 @@ const styles = theme => ({
         justifyContent: "center"
     },
     drawerPaper: {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.background.paper,
         width: CONSTANTS.DRAWER_WIDTH
     },
     contentRoot: {

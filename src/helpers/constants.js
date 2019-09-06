@@ -20,15 +20,10 @@ export default {
         createMuiTheme({
             palette: {
                 primary: {
-                    main: "#0074b8",
-                    dark: "#000000",
-                    navigationLink: "#000000"
+                    main: "#01579b"
                 },
                 secondary: {
-                    main: "#fafafa"
-                },
-                background: {
-                    default: "#ffffff"
+                    main: "#6a1b9a"
                 }
             },
             typography: {
