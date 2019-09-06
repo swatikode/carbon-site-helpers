@@ -1,4 +1,4 @@
-import { MuiThemeProvider, Typography } from "@material-ui/core";
+import { Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles/index";
 import PropTypes from "prop-types";
 import React from "react";
@@ -29,26 +29,24 @@ const styles = theme => ({
 function NotFoundPage(props) {
     const { classes } = props;
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            <div className={classes.root}>
-                <Typography
-                    variant="h1"
-                    gutterBottom
-                    className={classes.primaryText}
-                    color="primary"
-                >
-                    {CONSTANTS.NOTFOUND_PRIMARY_TITLE}
-                </Typography>
-                <Typography
-                    variant="h4"
-                    gutterBottom
-                    className={classes.secondaryText}
-                    color="secondary"
-                >
-                    {CONSTANTS.NOTFOUND_SECONDARY_TITLE}
-                </Typography>
-            </div>
-        </MuiThemeProvider>
+        <div className={classes.root}>
+            <Typography
+                variant="h1"
+                gutterBottom
+                className={classes.primaryText}
+                color="primary"
+            >
+                {CONSTANTS.NOTFOUND_PRIMARY_TITLE}
+            </Typography>
+            <Typography
+                variant="h4"
+                gutterBottom
+                className={classes.secondaryText}
+                color="secondary"
+            >
+                {CONSTANTS.NOTFOUND_SECONDARY_TITLE}
+            </Typography>
+        </div>
     );
 }
 

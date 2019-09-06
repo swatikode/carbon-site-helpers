@@ -2,7 +2,7 @@ import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import SearchIcon from "@material-ui/icons/Search";
 import Downshift from "downshift";
 import PropTypes from "prop-types";
@@ -72,7 +72,7 @@ function SearchBar(props) {
             e.target.keyCode === 13 || e.key === "Enter";
     };
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
+        <>
             {!isHome && withNav ? (
                 <Downshift id="downshift-popper">
                     {({
@@ -150,7 +150,7 @@ function SearchBar(props) {
             ) : (
                 ""
             )}
-        </MuiThemeProvider>
+        </>
     );
 }
 

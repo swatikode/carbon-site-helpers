@@ -3,7 +3,7 @@ import Divider from "@material-ui/core/Divider/index";
 import Drawer from "@material-ui/core/Drawer/index";
 import Hidden from "@material-ui/core/Hidden/index";
 import Link from "@material-ui/core/Link/index";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import PropTypes from "prop-types";
 import React from "react";
 import CONSTANTS from "../../helpers/constants";
@@ -165,50 +165,48 @@ class ResponsiveDrawer extends React.Component {
         );
 
         return (
-            <MuiThemeProvider theme={CONSTANTS.THEME()}>
-                <div className={classes.root}>
-                    <CssBaseline />
-                    <Header
-                        onMenuClick={this.handleDrawerToggle}
-                        title={getPageTitle(pages, currentPage.pathname)}
-                        pages={pages}
-                        gitHubURL={gitHubURL}
+            <div className={classes.root}>
+                <CssBaseline />
+                <Header
+                    onMenuClick={this.handleDrawerToggle}
+                    title={getPageTitle(pages, currentPage.pathname)}
+                    pages={pages}
+                    gitHubURL={gitHubURL}
+                />
+                <nav className={classes.drawer}>
+                    <Hidden smUp implementation="css">
+                        <Drawer
+                            anchor="left"
+                            open={mobileOpen}
+                            onClose={this.handleDrawerToggle}
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden xsDown implementation="css">
+                        <Drawer
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                            variant="permanent"
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
+                <main className={classes.contentRoot}>
+                    <div
+                        className={classes.content}
+                        ref={this.setElementRef}
+                        id={makeContentId(currentPage.pathname)}
+                        key={currentPage.pathname}
                     />
-                    <nav className={classes.drawer}>
-                        <Hidden smUp implementation="css">
-                            <Drawer
-                                anchor="left"
-                                open={mobileOpen}
-                                onClose={this.handleDrawerToggle}
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                        <Hidden xsDown implementation="css">
-                            <Drawer
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                                variant="permanent"
-                                open
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                    </nav>
-                    <main className={classes.contentRoot}>
-                        <div
-                            className={classes.content}
-                            ref={this.setElementRef}
-                            id={makeContentId(currentPage.pathname)}
-                            key={currentPage.pathname}
-                        />
-                    </main>
-                </div>
-            </MuiThemeProvider>
+                </main>
+            </div>
         );
     }
 }

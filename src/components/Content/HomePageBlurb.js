@@ -1,4 +1,3 @@
-import { MuiThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button/index";
 import Link from "@material-ui/core/Link/index";
 import { withStyles } from "@material-ui/core/styles/index";
@@ -79,51 +78,50 @@ function HomePageBlurb(props) {
     const { classes, startLink } = props;
 
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            <div className={classes.root}>
-                <div className={classes.hero}>
-                    <div className={classes.content}>
-                        <CarbonMainIcon />
-                        <div className={classes.text}>
-                            <Typography
-                                variant="h3"
-                                component="h1"
-                                color="inherit"
-                                gutterBottom
-                                className={classes.title}
-                            >
-                                {"Carbon"}
-                            </Typography>
-                            <Typography
-                                variant="h5"
-                                component="h2"
-                                color="inherit"
-                                gutterBottom
-                                className={classes.headline}
-                            >
-                                {
-                                    "A responsive graphing library built using d3 that integrates well with consumer's tech stack."
-                                }
-                            </Typography>
-                            <Button
-                                component={buttonProps => (
-                                    <Link
-                                        underline="none"
-                                        href={startLink}
-                                        {...buttonProps}
-                                    />
-                                )}
-                                className={classes.button}
-                                variant="contained"
-                                color="primary"
-                            >
-                                {CONSTANTS.GETTING_STARTED}
-                            </Button>
-                        </div>
+        <div className={classes.root}>
+            <div className={classes.hero}>
+                <div className={classes.content}>
+                    <CarbonMainIcon />
+                    <div className={classes.text}>
+                        <Typography
+                            variant="h3"
+                            component="h1"
+                            color="inherit"
+                            gutterBottom
+                            className={classes.title}
+                        >
+                            {"Carbon"}
+                        </Typography>
+                        <Typography
+                            variant="h5"
+                            component="h2"
+                            color="inherit"
+                            gutterBottom
+                            className={classes.headline}
+                        >
+                            {
+                                "A responsive graphing library built using d3 that integrates well with consumer's tech stack."
+                            }
+                        </Typography>
+                        <Button
+                            component={React.forwardRef((buttonProps, ref) => (
+                                <Link
+                                    underline="none"
+                                    ref={ref}
+                                    href={startLink}
+                                    {...buttonProps}
+                                />
+                            ))}
+                            className={classes.button}
+                            variant="contained"
+                            color="primary"
+                        >
+                            {CONSTANTS.GETTING_STARTED}
+                        </Button>
                     </div>
                 </div>
             </div>
-        </MuiThemeProvider>
+        </div>
     );
 }
 
