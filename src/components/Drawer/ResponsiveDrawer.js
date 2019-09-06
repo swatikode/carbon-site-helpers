@@ -27,7 +27,7 @@ const styles = theme => ({
     title: {
         color: theme.palette.text.secondary,
         display: "flex",
-        marginBottom: theme.spacing.unit / 2,
+        marginBottom: theme.spacing(0.5),
         "&:hover": {
             color: theme.palette.primary.main
         }
@@ -35,8 +35,8 @@ const styles = theme => ({
     titleIcon: {
         margin: 0,
         border: 0,
-        marginTop: theme.spacing.unit / 1.5,
-        marginRight: theme.spacing.unit / 1.5,
+        marginTop: theme.spacing(1 / 1.5),
+        marginRight: theme.spacing(1 / 1.5),
         display: "flex",
         height: 32,
         width: 32
@@ -55,7 +55,7 @@ const styles = theme => ({
     },
     toolbar: {
         ...theme.mixins.toolbar,
-        paddingLeft: theme.spacing.unit * 5,
+        paddingLeft: theme.spacing(5),
         display: "flex",
         flexGrow: 1,
         flexDirection: "column",
@@ -68,31 +68,30 @@ const styles = theme => ({
     },
     contentRoot: {
         display: "flex",
-        paddingTop: theme.spacing.unit * 9,
-        paddingLeft: theme.spacing.unit
+        paddingTop: theme.spacing(9),
+        paddingLeft: theme.spacing(1)
     },
     content: {
-        width: `calc(100vw - ${theme.spacing.unit * 2}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
+        width: `calc(100vw - ${theme.spacing(2)}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
         [theme.breakpoints.up("sm")]: {
             width: `calc(100vw - ${CONSTANTS.DRAWER_WIDTH +
-                theme.spacing.unit * 2}px)`
+                theme.spacing(2)}px)`
         },
-        height: `calc(100vh - ${theme.spacing.unit * 9}px)`,
+        height: `calc(100vh - ${theme.spacing(9)}px)`,
         fontFamily: theme.typography.fontFamily
     }
 });
 
 class ResponsiveDrawer extends React.Component {
-    state = {
-        mobileOpen: false
-    };
-
     constructor(props) {
         super(props);
         this.graph = null;
         this.contentElement = null;
         this.setElementRef = e => {
             this.contentElement = e;
+        };
+        this.state = {
+            mobileOpen: false
         };
     }
 
@@ -168,7 +167,7 @@ class ResponsiveDrawer extends React.Component {
         return (
             <MuiThemeProvider theme={CONSTANTS.THEME()}>
                 <div className={classes.root}>
-                    <CssBaseline/>
+                    <CssBaseline />
                     <Header
                         onMenuClick={this.handleDrawerToggle}
                         title={getPageTitle(pages, currentPage.pathname)}

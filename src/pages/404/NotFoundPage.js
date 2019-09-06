@@ -7,8 +7,8 @@ import CONSTANTS from "../../helpers/constants";
 const styles = theme => ({
     root: {
         flex: "1",
-        height: `calc(100vh - ${theme.spacing.unit * 5}px)`,
-        width: `calc(100vw - ${theme.spacing.unit * 5}px)`,
+        height: `calc(100vh - ${theme.spacing(5)}px)`,
+        width: `calc(100vw - ${theme.spacing(5)}px)`,
         margin: "auto",
         display: "flex",
         justifyContent: "center",

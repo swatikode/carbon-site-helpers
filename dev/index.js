@@ -85,6 +85,6 @@ renderSiteApp(
     ],
     {
         gettingStartedLink: "#/folder-1/file-1",
-        gitHubRepo: "https://github.com/cerner/carbon-graphs"
+        gitHubRepo: "https://github.com/cerner/carbon-site-helpers"
     }
 );

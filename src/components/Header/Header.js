@@ -78,6 +78,7 @@ function Header(props) {
                                 component="a"
                                 color="inherit"
                                 href={gitHubURL}
+                                target="_blank"
                                 aria-label={CONSTANTS.GITHUB_REPO_TOOLTIP}
                                 data-ga-event-category="AppBar"
                                 data-ga-event-action="github"

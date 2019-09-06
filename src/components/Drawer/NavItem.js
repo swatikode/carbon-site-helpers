@@ -95,7 +95,7 @@ class NavItem extends React.Component {
                             {...other}
                         >
                             <Button
-                                component={props => (
+                                component={React.forwardRef((props, ref) => (
                                     <Link
                                         classes={{
                                             root:
@@ -103,10 +103,11 @@ class NavItem extends React.Component {
                                                     ? classes.active
                                                     : ""
                                         }}
+                                        ref={ref}
                                         href={getHashedHref(href)}
                                         {...props}
                                     />
-                                )}
+                                ))}
                                 className={classNames(
                                     classes.buttonLeaf,
                                     `depth-${depth}`

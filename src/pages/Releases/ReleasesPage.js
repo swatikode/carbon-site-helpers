@@ -21,7 +21,7 @@ import { isLatestRelease } from "../../helpers/releasesInfo";
 
 const styles = theme => ({
     container: {
-        marginTop: theme.spacing.unit * 9
+        marginTop: theme.spacing(9)
     },
     cardHolder: {
         border: "none",
@@ -70,7 +70,7 @@ const ReleasesPage = props => {
         <MuiThemeProvider theme={CONSTANTS.THEME()}>
             <Paper>
                 <Header withNav={false} gitHubURL={gitHubURL} />
-                <React.Fragment>
+                <>
                     <Table className={classes.container}>
                         <TableBody>
                             {versions
@@ -118,7 +118,7 @@ const ReleasesPage = props => {
                             </TableRow>
                         </TableFooter>
                     </Table>
-                </React.Fragment>
+                </>
             </Paper>
         </MuiThemeProvider>
     );
