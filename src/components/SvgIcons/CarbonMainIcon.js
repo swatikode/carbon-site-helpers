@@ -7,7 +7,7 @@ import CONSTANTS from "../../helpers/constants";
 
 const styles = theme => ({
     logo: {
-        margin: `${theme.spacing.unit * 3}px 0 ${theme.spacing.unit * 4}px`,
+        margin: `${theme.spacing(3)}px 0 ${theme.spacing(4)}px`,
         width: "100%",
         height: "35vw",
         maxHeight: 250

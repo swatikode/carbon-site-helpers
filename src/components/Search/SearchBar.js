@@ -2,7 +2,7 @@ import Input from "@material-ui/core/Input";
 import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { fade } from "@material-ui/core/styles/colorManipulator";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import SearchIcon from "@material-ui/icons/Search";
 import Downshift from "downshift";
 import PropTypes from "prop-types";
@@ -25,7 +25,7 @@ const styles = theme => ({
         marginLeft: 0,
         width: "100%",
         [theme.breakpoints.up("sm")]: {
-            marginLeft: theme.spacing.unit,
+            marginLeft: theme.spacing(1),
             width: "auto"
         },
         [theme.breakpoints.only("xs")]: {
@@ -33,7 +33,7 @@ const styles = theme => ({
         }
     },
     searchIcon: {
-        width: theme.spacing.unit * 5,
+        width: theme.spacing(5),
         height: "100%",
         position: "absolute",
         pointerEvents: "none",
@@ -46,10 +46,10 @@ const styles = theme => ({
         width: "100%"
     },
     inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 5,
+        paddingTop: theme.spacing(1),
+        paddingRight: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        paddingLeft: theme.spacing(5),
         transition: theme.transitions.create("width"),
         width: "100%",
         [theme.breakpoints.up("sm")]: {
@@ -58,6 +58,10 @@ const styles = theme => ({
     },
     container: {
         position: "relative"
+    },
+    paperPopper: {
+        marginTop: theme.spacing(2.5),
+        marginLeft: theme.spacing(4)
     }
 });
 
@@ -68,7 +72,7 @@ function SearchBar(props) {
             e.target.keyCode === 13 || e.key === "Enter";
     };
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
+        <>
             {!isHome && withNav ? (
                 <Downshift id="downshift-popper">
                     {({
@@ -113,10 +117,9 @@ function SearchBar(props) {
                                         : {})}
                                 >
                                     <Paper
-                                        square
+                                        elevation={2}
+                                        className={classes.paperPopper}
                                         style={{
-                                            marginTop: 15,
-                                            marginLeft: 35,
                                             width: popperNode
                                                 ? popperNode.clientWidth
                                                 : null
@@ -147,7 +150,7 @@ function SearchBar(props) {
             ) : (
                 ""
             )}
-        </MuiThemeProvider>
+        </>
     );
 }
 

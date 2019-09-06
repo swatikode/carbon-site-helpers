@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import React from "react";
 import ReactDOM from "react-dom";
+import { ThemeProvider } from "@material-ui/styles";
 import { HashRouter, Route, Switch } from "react-router-dom";
 import CONSTANTS from "./helpers/constants";
 import {
@@ -18,31 +19,45 @@ import {
 function AppRouter(props) {
     const { pages, startLink, gitHubURL } = props;
     return (
-        <HashRouter basename={process.env.PUBLIC_URL}>
-            <div>
-                <Switch>
-                    {flatten(pages, CONSTANTS.PATHNAME_PROPERTY).map(p => (
+        <ThemeProvider theme={CONSTANTS.THEME()}>
+            <HashRouter basename={process.env.PUBLIC_URL}>
+                <div>
+                    <Switch>
+                        {flatten(pages, CONSTANTS.PATHNAME_PROPERTY).map(p => (
+                            <Route
+                                exact
+                                key={p}
+                                path={p}
+                                render={() => (
+                                    <GettingStartedPage
+                                        pages={pages}
+                                        gitHubURL={gitHubURL}
+                                    />
+                                )}
+                            />
+                        ))}
                         <Route
                             exact
-                            key={p}
-                            path={p}
-                            render={() => <GettingStartedPage pages={pages} gitHubURL={gitHubURL}/>}
+                            path="/"
+                            render={() => (
+                                <HomePage
+                                    startLink={startLink}
+                                    gitHubURL={gitHubURL}
+                                />
+                            )}
                         />
-                    ))}
-                    <Route
-                        exact
-                        path="/"
-                        render={() => <HomePage startLink={startLink} gitHubURL={gitHubURL}/>}
-                    />
-                    <Route
-                        exact
-                        path={`/${CONSTANTS.VERSIONS_PATH}`}
-                        render={() => <ReleasesPage gitHubURL={gitHubURL}/>}
-                    />
-                    <Route component={NotFoundPage}/>
-                </Switch>
-            </div>
-        </HashRouter>
+                        <Route
+                            exact
+                            path={`/${CONSTANTS.VERSIONS_PATH}`}
+                            render={() => (
+                                <ReleasesPage gitHubURL={gitHubURL} />
+                            )}
+                        />
+                        <Route component={NotFoundPage} />
+                    </Switch>
+                </div>
+            </HashRouter>
+        </ThemeProvider>
     );
 }
 
@@ -68,7 +83,11 @@ const renderSiteApp = (pages, siteOptions) => {
     validatePageObject(pages);
     validateStartLink(siteOptions.gettingStartedLink);
     ReactDOM.render(
-        <AppRouter pages={pages} startLink={siteOptions.gettingStartedLink} gitHubURL={siteOptions.gitHubRepo}/>,
+        <AppRouter
+            pages={pages}
+            startLink={siteOptions.gettingStartedLink}
+            gitHubURL={siteOptions.gitHubRepo}
+        />,
         document.getElementById("root")
     );
 };

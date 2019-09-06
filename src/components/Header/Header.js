@@ -1,6 +1,6 @@
 import AppBar from "@material-ui/core/AppBar/index";
 import IconButton from "@material-ui/core/IconButton/index";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import Toolbar from "@material-ui/core/Toolbar/index";
 import Tooltip from "@material-ui/core/Tooltip/index";
 import Typography from "@material-ui/core/Typography/index";
@@ -40,55 +40,66 @@ const styles = theme => ({
 });
 
 function Header(props) {
-    const { classes, title, onMenuClick, isHome, pages, gitHubURL, withNav } = props;
+    const {
+        classes,
+        title,
+        onMenuClick,
+        isHome,
+        pages,
+        gitHubURL,
+        withNav
+    } = props;
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            <div className={classes.root}>
-                <AppBar
-                    position="fixed"
-                    className={classNames({
-                        [classes.appBarHome]: true,
-                        [classes.appBarWithNav]: !isHome && withNav
-                    })}
-                >
-                    <Toolbar>
+        <div className={classes.root}>
+            <AppBar
+                position="fixed"
+                className={classNames({
+                    [classes.appBarHome]: true,
+                    [classes.appBarWithNav]: !isHome && withNav
+                })}
+            >
+                <Toolbar>
+                    <IconButton
+                        className={classes.menuButton}
+                        style={{ display: isHome ? "none" : "" }}
+                        onClick={onMenuClick}
+                        color="inherit"
+                        aria-label="Menu"
+                    >
+                        <MenuIcon />
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        color="inherit"
+                        className={classes.grow}
+                    >
+                        {title}
+                    </Typography>
+                    <SearchBar
+                        pages={pages}
+                        isHome={isHome}
+                        withNav={withNav}
+                    />
+                    <LatestReleasePage isHome={isHome} gitHubURL={gitHubURL} />
+                    <Tooltip
+                        title={CONSTANTS.GITHUB_REPO_TOOLTIP}
+                        enterDelay={300}
+                    >
                         <IconButton
-                            className={classes.menuButton}
-                            style={{ display: isHome ? "none" : "" }}
-                            onClick={onMenuClick}
+                            component="a"
                             color="inherit"
-                            aria-label="Menu"
+                            href={gitHubURL}
+                            target="_blank"
+                            aria-label={CONSTANTS.GITHUB_REPO_TOOLTIP}
+                            data-ga-event-category="AppBar"
+                            data-ga-event-action="github"
                         >
-                            <MenuIcon/>
+                            <GithubIcon />
                         </IconButton>
-                        <Typography
-                            variant="h6"
-                            color="inherit"
-                            className={classes.grow}
-                        >
-                            {title}
-                        </Typography>
-                        <SearchBar pages={pages} isHome={isHome} withNav={withNav}/>
-                        <LatestReleasePage isHome={isHome} gitHubURL={gitHubURL}/>
-                        <Tooltip
-                            title={CONSTANTS.GITHUB_REPO_TOOLTIP}
-                            enterDelay={300}
-                        >
-                            <IconButton
-                                component="a"
-                                color="inherit"
-                                href={gitHubURL}
-                                aria-label={CONSTANTS.GITHUB_REPO_TOOLTIP}
-                                data-ga-event-category="AppBar"
-                                data-ga-event-action="github"
-                            >
-                                <GithubIcon/>
-                            </IconButton>
-                        </Tooltip>
-                    </Toolbar>
-                </AppBar>
-            </div>
-        </MuiThemeProvider>
+                    </Tooltip>
+                </Toolbar>
+            </AppBar>
+        </div>
     );
 }
 

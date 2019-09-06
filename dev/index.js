@@ -47,11 +47,12 @@ renderSiteApp(
                             }
                         },
                         {
-                            pathname: "/folder-1/nested-folder/nested-file-3",
+                            pathname:
+                                "/folder-1/nested-folder/nested-file-long-name-to-work-with",
                             content: id => {
                                 appContent(
                                     id,
-                                    "content/folder-1/nested-folder/nested-file-3"
+                                    "content/folder-1/nested-folder/nested-file-long-name-to-work-with"
                                 );
                             }
                         }
@@ -85,6 +86,6 @@ renderSiteApp(
     ],
     {
         gettingStartedLink: "#/folder-1/file-1",
-        gitHubRepo: "https://github.com/cerner/carbon-graphs"
+        gitHubRepo: "https://github.com/cerner/carbon-site-helpers"
     }
 );

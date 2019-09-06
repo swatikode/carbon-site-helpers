@@ -3,7 +3,7 @@ import Divider from "@material-ui/core/Divider/index";
 import Drawer from "@material-ui/core/Drawer/index";
 import Hidden from "@material-ui/core/Hidden/index";
 import Link from "@material-ui/core/Link/index";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import PropTypes from "prop-types";
 import React from "react";
 import CONSTANTS from "../../helpers/constants";
@@ -25,9 +25,9 @@ const styles = theme => ({
         display: "flex"
     },
     title: {
-        color: theme.palette.text.secondary,
+        color: theme.palette.text.primary,
         display: "flex",
-        marginBottom: theme.spacing.unit / 2,
+        marginBottom: theme.spacing(0.5),
         "&:hover": {
             color: theme.palette.primary.main
         }
@@ -35,8 +35,8 @@ const styles = theme => ({
     titleIcon: {
         margin: 0,
         border: 0,
-        marginTop: theme.spacing.unit / 1.5,
-        marginRight: theme.spacing.unit / 1.5,
+        marginTop: theme.spacing(1 / 1.5),
+        marginRight: theme.spacing(1 / 1.5),
         display: "flex",
         height: 32,
         width: 32
@@ -55,7 +55,7 @@ const styles = theme => ({
     },
     toolbar: {
         ...theme.mixins.toolbar,
-        paddingLeft: theme.spacing.unit * 5,
+        paddingLeft: theme.spacing(5),
         display: "flex",
         flexGrow: 1,
         flexDirection: "column",
@@ -63,36 +63,35 @@ const styles = theme => ({
         justifyContent: "center"
     },
     drawerPaper: {
-        backgroundColor: theme.palette.secondary.main,
+        backgroundColor: theme.palette.background.paper,
         width: CONSTANTS.DRAWER_WIDTH
     },
     contentRoot: {
         display: "flex",
-        paddingTop: theme.spacing.unit * 9,
-        paddingLeft: theme.spacing.unit
+        paddingTop: theme.spacing(9),
+        paddingLeft: theme.spacing(1)
     },
     content: {
-        width: `calc(100vw - ${theme.spacing.unit * 2}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
+        width: `calc(100vw - ${theme.spacing(2)}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
         [theme.breakpoints.up("sm")]: {
             width: `calc(100vw - ${CONSTANTS.DRAWER_WIDTH +
-                theme.spacing.unit * 2}px)`
+                theme.spacing(2)}px)`
         },
-        height: `calc(100vh - ${theme.spacing.unit * 9}px)`,
+        height: `calc(100vh - ${theme.spacing(9)}px)`,
         fontFamily: theme.typography.fontFamily
     }
 });
 
 class ResponsiveDrawer extends React.Component {
-    state = {
-        mobileOpen: false
-    };
-
     constructor(props) {
         super(props);
         this.graph = null;
         this.contentElement = null;
         this.setElementRef = e => {
             this.contentElement = e;
+        };
+        this.state = {
+            mobileOpen: false
         };
     }
 
@@ -166,50 +165,48 @@ class ResponsiveDrawer extends React.Component {
         );
 
         return (
-            <MuiThemeProvider theme={CONSTANTS.THEME()}>
-                <div className={classes.root}>
-                    <CssBaseline/>
-                    <Header
-                        onMenuClick={this.handleDrawerToggle}
-                        title={getPageTitle(pages, currentPage.pathname)}
-                        pages={pages}
-                        gitHubURL={gitHubURL}
+            <div className={classes.root}>
+                <CssBaseline />
+                <Header
+                    onMenuClick={this.handleDrawerToggle}
+                    title={getPageTitle(pages, currentPage.pathname)}
+                    pages={pages}
+                    gitHubURL={gitHubURL}
+                />
+                <nav className={classes.drawer}>
+                    <Hidden smUp implementation="css">
+                        <Drawer
+                            anchor="left"
+                            open={mobileOpen}
+                            onClose={this.handleDrawerToggle}
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden xsDown implementation="css">
+                        <Drawer
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                            variant="permanent"
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
+                <main className={classes.contentRoot}>
+                    <div
+                        className={classes.content}
+                        ref={this.setElementRef}
+                        id={makeContentId(currentPage.pathname)}
+                        key={currentPage.pathname}
                     />
-                    <nav className={classes.drawer}>
-                        <Hidden smUp implementation="css">
-                            <Drawer
-                                anchor="left"
-                                open={mobileOpen}
-                                onClose={this.handleDrawerToggle}
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                        <Hidden xsDown implementation="css">
-                            <Drawer
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                                variant="permanent"
-                                open
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                    </nav>
-                    <main className={classes.contentRoot}>
-                        <div
-                            className={classes.content}
-                            ref={this.setElementRef}
-                            id={makeContentId(currentPage.pathname)}
-                            key={currentPage.pathname}
-                        />
-                    </main>
-                </div>
-            </MuiThemeProvider>
+                </main>
+            </div>
         );
     }
 }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import marked from "marked";
-import { MuiThemeProvider, withStyles } from "@material-ui/core/styles/index";
+import { withStyles } from "@material-ui/core/styles/index";
 import DOMPurify from "dompurify";
 import classNames from "classnames";
 
@@ -16,12 +16,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import useReleases from "../../hooks/useReleases";
 import Header from "../../components/Header/Header";
-import CONSTANTS from "../../helpers/constants";
 import { isLatestRelease } from "../../helpers/releasesInfo";
 
 const styles = theme => ({
     container: {
-        marginTop: theme.spacing.unit * 9
+        marginTop: theme.spacing(9)
     },
     cardHolder: {
         border: "none",
@@ -67,60 +66,54 @@ const ReleasesPage = props => {
     }
 
     return (
-        <MuiThemeProvider theme={CONSTANTS.THEME()}>
-            <Paper>
-                <Header withNav={false} gitHubURL={gitHubURL} />
-                <React.Fragment>
-                    <Table className={classes.container}>
-                        <TableBody>
-                            {versions
-                                .slice(
-                                    page * rowsPerPage,
-                                    page * rowsPerPage + rowsPerPage
-                                )
-                                .map(v => (
-                                    <TableRow key={v.id}>
-                                        <TableCell
-                                            className={classes.cardHolder}
-                                        >
-                                            <Card
-                                                raised={isLatestRelease(
+        <Paper>
+            <Header withNav={false} gitHubURL={gitHubURL} />
+            <>
+                <Table className={classes.container}>
+                    <TableBody>
+                        {versions
+                            .slice(
+                                page * rowsPerPage,
+                                page * rowsPerPage + rowsPerPage
+                            )
+                            .map(v => (
+                                <TableRow key={v.id}>
+                                    <TableCell className={classes.cardHolder}>
+                                        <Card
+                                            raised={isLatestRelease(
+                                                versions,
+                                                v
+                                            )}
+                                            className={classNames({
+                                                [classes.latestRelease]: isLatestRelease(
                                                     versions,
                                                     v
-                                                )}
-                                                className={classNames({
-                                                    [classes.latestRelease]: isLatestRelease(
-                                                        versions,
-                                                        v
-                                                    )
-                                                })}
-                                            >
-                                                <CardContent>
-                                                    {getReleaseDetails(v)}
-                                                </CardContent>
-                                            </Card>
-                                        </TableCell>
-                                    </TableRow>
-                                ))}
-                        </TableBody>
-                        <TableFooter>
-                            <TableRow>
-                                <TablePagination
-                                    rowsPerPageOptions={[5, 10, 25]}
-                                    count={versions.length}
-                                    onChangePage={handlePageChange}
-                                    onChangeRowsPerPage={
-                                        handleChangeRowsPerPage
-                                    }
-                                    page={page}
-                                    rowsPerPage={rowsPerPage}
-                                />
-                            </TableRow>
-                        </TableFooter>
-                    </Table>
-                </React.Fragment>
-            </Paper>
-        </MuiThemeProvider>
+                                                )
+                                            })}
+                                        >
+                                            <CardContent>
+                                                {getReleaseDetails(v)}
+                                            </CardContent>
+                                        </Card>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                    </TableBody>
+                    <TableFooter>
+                        <TableRow>
+                            <TablePagination
+                                rowsPerPageOptions={[5, 10, 25]}
+                                count={versions.length}
+                                onChangePage={handlePageChange}
+                                onChangeRowsPerPage={handleChangeRowsPerPage}
+                                page={page}
+                                rowsPerPage={rowsPerPage}
+                            />
+                        </TableRow>
+                    </TableFooter>
+                </Table>
+            </>
+        </Paper>
     );
 };
 
