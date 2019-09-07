@@ -1,4 +1,4 @@
-import CONSTANTS from "./constants";
+import constants from "./constants";
 import { makeTitle } from "./pageHelpers";
 
 /**
@@ -19,7 +19,7 @@ const getFilteredSuggestions = (suggestions, value) => {
                     .toLowerCase()
                     .indexOf(inputValue) > -1
         )
-        .slice(0, CONSTANTS.SEARCH_MAX_RESULTS);
+        .slice(0, constants.SEARCH_MAX_RESULTS);
 };
 /**
  * Creates search title to be shown in the popup in a readable way.

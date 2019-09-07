@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles/index";
 import Typography from "@material-ui/core/Typography/index";
 import PropTypes from "prop-types";
 import React from "react";
-import CONSTANTS from "../../helpers/constants";
+import constants from "../../helpers/constants";
 import CarbonMainIcon from "../SvgIcons/CarbonMainIcon";
 
 const styles = theme => ({
@@ -116,7 +116,7 @@ function HomePageBlurb(props) {
                             variant="contained"
                             color="primary"
                         >
-                            {CONSTANTS.GETTING_STARTED}
+                            {constants.GETTING_STARTED}
                         </Button>
                     </div>
                 </div>

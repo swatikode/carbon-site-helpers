@@ -2,7 +2,7 @@ import { Typography } from "@material-ui/core";
 import { withStyles } from "@material-ui/core/styles/index";
 import PropTypes from "prop-types";
 import React from "react";
-import CONSTANTS from "../../helpers/constants";
+import constants from "../../helpers/constants";
 
 const styles = theme => ({
     root: {
@@ -36,7 +36,7 @@ function NotFoundPage(props) {
                 className={classes.primaryText}
                 color="primary"
             >
-                {CONSTANTS.NOTFOUND_PRIMARY_TITLE}
+                {constants.NOTFOUND_PRIMARY_TITLE}
             </Typography>
             <Typography
                 variant="h4"
@@ -44,7 +44,7 @@ function NotFoundPage(props) {
                 className={classes.secondaryText}
                 color="secondary"
             >
-                {CONSTANTS.NOTFOUND_SECONDARY_TITLE}
+                {constants.NOTFOUND_SECONDARY_TITLE}
             </Typography>
         </div>
     );

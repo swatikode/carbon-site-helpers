@@ -32,11 +32,12 @@ const validatePageObject = pageObject => {
 /**
  * Returns the title shown within the nav section
  * @param {string} str - pathname or title
+ * @param {string} delimiter - pathname or title delimiter
  * @returns {string} pathname or title properly formatted and capitalized
  */
-const makeTitle = str =>
+const makeTitle = (str, delimiter = "-") =>
     str
-        .split("-")
+        .split(delimiter)
         .map(word => word.charAt(0).toUpperCase() + word.slice(1))
         .join(" ");
 /**

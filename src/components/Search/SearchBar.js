@@ -3,11 +3,11 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import { fade } from "@material-ui/core/styles/colorManipulator";
 import { withStyles } from "@material-ui/core/styles/index";
-import SearchIcon from "@material-ui/icons/Search";
+import SearchIcon from "@material-ui/icons/SearchRounded";
 import Downshift from "downshift";
 import PropTypes from "prop-types";
 import React from "react";
-import CONSTANTS from "../../helpers/constants";
+import constants from "../../helpers/constants";
 import { flatten } from "../../helpers/pageHelpers";
 import { getFilteredSuggestions } from "../../helpers/searchHelpers";
 import SearchItem from "./SearchItem";
@@ -93,7 +93,7 @@ function SearchBar(props) {
                                         inputProps={getInputProps({
                                             onKeyDown: handleKeyDown,
                                             placeholder:
-                                                CONSTANTS.SEARCH_PLACEHOLDER
+                                                constants.SEARCH_PLACEHOLDER
                                         })}
                                         disableUnderline
                                         inputRef={node => {

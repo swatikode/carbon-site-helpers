@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import Chip from "@material-ui/core/Chip";
 import { withStyles } from "@material-ui/core/styles/index";
 import useReleases from "../../hooks/useReleases";
-import CONSTANTS from "../../helpers/constants";
+import constants from "../../helpers/constants";
 import { getLatestRelease } from "../../helpers/releasesInfo";
 
 const styles = theme => ({
@@ -28,7 +28,7 @@ const LatestReleasePage = props => {
             className={classes.container}
             label={getLatestRelease(releases)}
             component="a"
-            href={`#/${CONSTANTS.VERSIONS_PATH}`}
+            href={`#/${constants.VERSIONS_PATH}`}
             clickable
         />
     ) : (

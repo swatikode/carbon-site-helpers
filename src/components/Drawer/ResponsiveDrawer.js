@@ -2,11 +2,10 @@ import CssBaseline from "@material-ui/core/CssBaseline/index";
 import Divider from "@material-ui/core/Divider/index";
 import Drawer from "@material-ui/core/Drawer/index";
 import Hidden from "@material-ui/core/Hidden/index";
-import Link from "@material-ui/core/Link/index";
 import { withStyles } from "@material-ui/core/styles/index";
 import PropTypes from "prop-types";
 import React from "react";
-import CONSTANTS from "../../helpers/constants";
+import constants from "../../helpers/constants";
 import renderNavItems from "../../helpers/navItemHelpers";
 import {
     getPageContent,
@@ -15,35 +14,16 @@ import {
 } from "../../helpers/pageHelpers";
 import { RouterContextConsumer } from "../Context/RouterContext";
 import Header from "../Header/Header";
-import CarbonMainIcon from "../SvgIcons/CarbonMainIcon";
+import ToolbarIcon from "./ToolbarIcon";
+import ContentBreadcrumb from "./ContentBreadcrumb";
 
 const styles = theme => ({
     root: {
         display: "flex"
     },
-    toolbarContainer: {
-        display: "flex"
-    },
-    title: {
-        color: theme.palette.text.primary,
-        display: "flex",
-        marginBottom: theme.spacing(0.5),
-        "&:hover": {
-            color: theme.palette.primary.main
-        }
-    },
-    titleIcon: {
-        margin: 0,
-        border: 0,
-        marginTop: theme.spacing(1 / 1.5),
-        marginRight: theme.spacing(1 / 1.5),
-        display: "flex",
-        height: 32,
-        width: 32
-    },
     drawer: {
         [theme.breakpoints.up("sm")]: {
-            width: CONSTANTS.DRAWER_WIDTH,
+            width: constants.DRAWER_WIDTH,
             flexShrink: 0
         }
     },
@@ -53,28 +33,26 @@ const styles = theme => ({
             display: "none"
         }
     },
-    toolbar: {
-        ...theme.mixins.toolbar,
-        paddingLeft: theme.spacing(5),
-        display: "flex",
-        flexGrow: 1,
-        flexDirection: "column",
-        alignItems: "flex-start",
-        justifyContent: "center"
-    },
     drawerPaper: {
         backgroundColor: theme.palette.background.paper,
-        width: CONSTANTS.DRAWER_WIDTH
+        width: constants.DRAWER_WIDTH
     },
     contentRoot: {
         display: "flex",
+        background: theme.palette.background.paper,
+        flexDirection: "column",
+        height: "100vh",
         paddingTop: theme.spacing(9),
-        paddingLeft: theme.spacing(1)
+        paddingLeft: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        paddingRight: theme.spacing(1)
     },
     content: {
+        display: "flex",
+        flex: "1",
         width: `calc(100vw - ${theme.spacing(2)}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
         [theme.breakpoints.up("sm")]: {
-            width: `calc(100vw - ${CONSTANTS.DRAWER_WIDTH +
+            width: `calc(100vw - ${constants.DRAWER_WIDTH +
                 theme.spacing(2)}px)`
         },
         height: `calc(100vh - ${theme.spacing(9)}px)`,
@@ -138,20 +116,7 @@ class ResponsiveDrawer extends React.Component {
             <RouterContextConsumer>
                 {context => (
                     <div>
-                        <div className={classes.toolbarContainer}>
-                            <div className={classes.toolbar}>
-                                <Link
-                                    className={classes.title}
-                                    href={CONSTANTS.HEADER_ROOT_LINK}
-                                    variant="h4"
-                                >
-                                    <CarbonMainIcon
-                                        className={classes.titleIcon}
-                                    />
-                                    {CONSTANTS.HEADER_MAIN_TITLE}
-                                </Link>
-                            </div>
-                        </div>
+                        <ToolbarIcon />
                         <Divider />
                         {renderNavItems({
                             props,
@@ -199,6 +164,7 @@ class ResponsiveDrawer extends React.Component {
                     </Hidden>
                 </nav>
                 <main className={classes.contentRoot}>
+                    <ContentBreadcrumb pathname={currentPage.pathname} />
                     <div
                         className={classes.content}
                         ref={this.setElementRef}

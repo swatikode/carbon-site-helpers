@@ -3,7 +3,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { ThemeProvider } from "@material-ui/styles";
 import { HashRouter, Route, Switch } from "react-router-dom";
-import CONSTANTS from "./helpers/constants";
+import constants from "./helpers/constants";
 import {
     flatten,
     validatePageObject,
@@ -19,11 +19,11 @@ import {
 function AppRouter(props) {
     const { pages, startLink, gitHubURL } = props;
     return (
-        <ThemeProvider theme={CONSTANTS.THEME()}>
+        <ThemeProvider theme={constants.THEME()}>
             <HashRouter basename={process.env.PUBLIC_URL}>
                 <div>
                     <Switch>
-                        {flatten(pages, CONSTANTS.PATHNAME_PROPERTY).map(p => (
+                        {flatten(pages, constants.PATHNAME_PROPERTY).map(p => (
                             <Route
                                 exact
                                 key={p}
@@ -48,7 +48,7 @@ function AppRouter(props) {
                         />
                         <Route
                             exact
-                            path={`/${CONSTANTS.VERSIONS_PATH}`}
+                            path={`/${constants.VERSIONS_PATH}`}
                             render={() => (
                                 <ReleasesPage gitHubURL={gitHubURL} />
                             )}
