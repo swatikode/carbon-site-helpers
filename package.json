@@ -46,15 +46,19 @@
     "@material-ui/icons": "^3.0.2",
     "@material-ui/styles": "^4.3.3",
     "axios": "^0.19.0",
+    "brace": "^0.11.1",
     "classnames": "^2.2.6",
+    "codemirror": "^5.48.4",
     "dompurify": "^1.0.11",
     "downshift": "^3.2.12",
     "marked": "^0.7.0",
     "prop-types": "^15.7.2",
     "react": "^16.9.0",
+    "react-ace": "^7.0.4",
     "react-dom": "^16.9.0",
     "react-router": "^5.0.0",
-    "react-router-dom": "^5.0.0"
+    "react-router-dom": "^5.0.0",
+    "source-map-unpack": "0.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.5.5",

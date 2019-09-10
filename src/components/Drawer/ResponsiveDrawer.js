@@ -16,6 +16,11 @@ import {
 import { RouterContextConsumer } from "../Context/RouterContext";
 import Header from "../Header/Header";
 import CarbonMainIcon from "../SvgIcons/CarbonMainIcon";
+import AceEditor from "react-ace";
+import 'brace/theme/twilight';
+import 'brace/mode/javascript';
+import CodeIcon from "@material-ui/icons/Code";
+import Chip from "@material-ui/core/Chip";
 
 const styles = theme => ({
     root: {
@@ -69,7 +74,8 @@ const styles = theme => ({
     contentRoot: {
         display: "flex",
         paddingTop: theme.spacing.unit * 9,
-        paddingLeft: theme.spacing.unit
+        paddingLeft: theme.spacing.unit,
+        flexDirection: "column"
     },
     content: {
         width: `calc(100vw - ${theme.spacing.unit * 2}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
@@ -84,7 +90,8 @@ const styles = theme => ({
 
 class ResponsiveDrawer extends React.Component {
     state = {
-        mobileOpen: false
+        mobileOpen: false,
+        showCode: false
     };
 
     constructor(props) {
@@ -125,16 +132,26 @@ class ResponsiveDrawer extends React.Component {
     renderContent() {
         const { currentPage, pages } = this.props;
         if (currentPage) {
-            this.graph = getPageContent(pages, currentPage.pathname)(
+            this.graph = getPageContent(pages, currentPage.pathname, currentPage)(
                 this.contentElement.id
             );
         }
+        console.log("in renderContent");
+        console.log(currentPage);
     }
+
+    handleCodeIconClick = () => {
+        this.setState(state => ({
+            showCode: !state.showCode
+        }));
+    };
 
     render() {
         const { props, state } = this;
         const { classes, pages, currentPage, gitHubURL } = props;
-        const { mobileOpen } = state;
+        console.log("in the render of responsive drawer");
+        console.log(currentPage);
+        const { mobileOpen, showCode } = state;
         const drawer = (
             <RouterContextConsumer>
                 {context => (
@@ -200,12 +217,32 @@ class ResponsiveDrawer extends React.Component {
                             </Drawer>
                         </Hidden>
                     </nav>
-                    <main className={classes.contentRoot}>
+                    <main className={classes.contentRoot} id="main">
+                        <Chip
+                            style={{border: "none", width: "3rem" }}
+                            size="small"
+                            variant="outlined"
+                            icon={<CodeIcon/>}
+                            onClick={this.handleCodeIconClick}
+                        />
                         <div
+                            style={showCode ? {display: "none"} : {display: ""}}
                             className={classes.content}
                             ref={this.setElementRef}
                             id={makeContentId(currentPage.pathname)}
                             key={currentPage.pathname}
+                        />
+                        <AceEditor
+                            style={showCode ? {display: ""} : {display: "none"}}
+                            value={currentPage.content ? currentPage.content.toString() : "cannot display"}
+                            name="APP_CONTENT_CODE"
+                            mode="javascript"
+                            theme="twilight"
+                            setOptions={{
+                                showLineNumbers: true,
+                                showGutter: true
+                            }}
+                            readOnly={true}
                         />
                     </main>
                 </div>

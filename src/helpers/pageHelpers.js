@@ -91,7 +91,11 @@ const getMatchingPage = (pages, key) => {
  * @param {string} key - href key
  * @return {function} content for the page
  */
-const getPageContent = (pages, key) => getMatchingPage(pages, key).content;
+const getPageContent = (pages, key, currentPage) => {
+    currentPage.content = getMatchingPage(pages, key).content;
+    return getMatchingPage(pages, key).content;
+};
+
 /**
  * Page title for the header and Nav
  * @param {array} pages - list of page objects
