@@ -22,7 +22,9 @@ const styles = theme => ({
     appBarWithNav: {
         [theme.breakpoints.up("sm")]: {
             width: `calc(100% - ${constants.DRAWER_WIDTH}px)`
-        }
+        },
+        minWidth: 0,
+        flexBasis: "50%"
     },
     menuButton: {
         marginRight: 20,
@@ -30,10 +32,12 @@ const styles = theme => ({
             display: "none"
         }
     },
-    grow: {
+    headerTitle: {
         flexGrow: 1,
-        noWrap: 1,
-        [theme.breakpoints.only("xs")]: {
+        textOverflow: "ellipsis",
+        overflow: "hidden",
+        whiteSpace: "nowrap",
+        [theme.breakpoints.down("sm")]: {
             fontSize: 18
         }
     }
@@ -68,9 +72,10 @@ function Header(props) {
                     <MenuIcon />
                 </IconButton>
                 <Typography
-                    variant="h5"
+                    variant="h6"
                     color="inherit"
-                    className={classes.grow}
+                    title={title}
+                    className={classes.headerTitle}
                 >
                     {title}
                 </Typography>

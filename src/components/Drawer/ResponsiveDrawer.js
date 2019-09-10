@@ -48,15 +48,12 @@ const styles = theme => ({
         paddingRight: theme.spacing(1)
     },
     content: {
-        display: "flex",
-        flex: "1",
         width: `calc(100vw - ${theme.spacing(2)}px)`, // The below width parameters are dependant on the paddingLeft of contentRoot
         [theme.breakpoints.up("sm")]: {
             width: `calc(100vw - ${constants.DRAWER_WIDTH +
                 theme.spacing(2)}px)`
         },
-        height: `calc(100vh - ${theme.spacing(9)}px)`,
-        fontFamily: theme.typography.fontFamily
+        height: `calc(100vh - ${theme.spacing(9)}px)`
     }
 });
 
