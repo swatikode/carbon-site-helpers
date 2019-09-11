@@ -43,7 +43,7 @@ export default {
         }),
     VERSIONS_PATH: "versions",
     LOCAL_STORAGE: {
-        GET_RELEASES_ETAG: "GET_RELEASES_ETAG",
-        RELEASES_DATA: "RELEASES_DATA",
+        GET_RELEASES_ETAG: "getReleasesETAG",
+        RELEASES_DATA: "releasesData",
     }
 };
