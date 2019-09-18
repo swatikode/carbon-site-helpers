@@ -22,6 +22,13 @@ import 'brace/mode/javascript';
 import CodeIcon from "@material-ui/icons/Code";
 import Chip from "@material-ui/core/Chip";
 
+const myCode = "const appContent = (id, value) => {\n" +
+    "    document.querySelector(`#${id}`).innerHTML = value;\n" +
+    "    document\n" +
+    "        .querySelector(`#${id}`)\n" +
+    "        .setAttribute(\"style\", \"padding: 2rem; border: 1px dashed; \");\n" +
+    "};";
+
 const styles = theme => ({
     root: {
         display: "flex"
@@ -234,7 +241,8 @@ class ResponsiveDrawer extends React.Component {
                         />
                         <AceEditor
                             style={showCode ? {display: ""} : {display: "none"}}
-                            value={currentPage.content ? currentPage.content.toString() : "cannot display"}
+                            /*value={currentPage.content ? currentPage.content.toString() : "cannot display"}*/
+                            value={myCode}
                             name="APP_CONTENT_CODE"
                             mode="javascript"
                             theme="twilight"
